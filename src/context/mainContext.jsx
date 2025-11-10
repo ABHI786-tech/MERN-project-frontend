@@ -36,7 +36,7 @@ export const MainContextProvider = ({ children }) => {
         return;
       }
 // console.log("🔹 Sending request...");
-      const response = await axios.get("http://localhost:8000/profile", {
+      const response = await axios.get("/profile", {
         headers:{
           Authorization:`Bearer ${token}`
         },
@@ -75,3 +75,4 @@ export const MainContextProvider = ({ children }) => {
     </MainContext.Provider>
   );
 };
+
