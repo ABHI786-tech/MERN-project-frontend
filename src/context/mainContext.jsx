@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { removeUser, setUser } from "../redux/slice/authSlice";
 import { useNavigate } from "react-router-dom";
+import { axiosClient } from "../utils/axios";
 
 
 const MainContext = createContext();
@@ -36,7 +37,7 @@ export const MainContextProvider = ({ children }) => {
         return;
       }
 // console.log("🔹 Sending request...");
-      const response = await axios.get("/profile", {
+      const response = await axiosClient.get("/profile", {
         headers:{
           Authorization:`Bearer ${token}`
         },
@@ -75,4 +76,5 @@ export const MainContextProvider = ({ children }) => {
     </MainContext.Provider>
   );
 };
+
 
