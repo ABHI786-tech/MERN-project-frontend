@@ -39,7 +39,7 @@ const UpdateEmployee = () => {
         try {
             setLoading(true);
             const token = localStorage.getItem("token");
-            const response = await axios.get(`http://localhost:8000/updateemployee/${id}`,{
+            const response = await axiosClient.get(`updateemployee/${id}`,{
                 headers: {
                     Authorization: `Bearer ${token}`
                 },

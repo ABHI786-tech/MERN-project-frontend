@@ -32,7 +32,11 @@ const AllEmployee = () => {
 
     const deleteEmployee = async (id) => {
         try {
-            const response = await axiosClient.delete(`/employee/${id}`)
+            const response = await axiosClient.delete(`/employee/${id}`,{
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+                }
+            })
             getEmployee();
             toast.success(response.message)
 
