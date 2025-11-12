@@ -111,7 +111,8 @@ const UpdateEmployee = () => {
                 enableReinitialize={true}
             >
                 {({ values }) => (
-                    <Form className='w-[90%] px-auto py-10 bg-zinc-100'>
+                    <Form className='w-full md:w-2/4 py-6 bg-zinc-100 px-6 '>
+                         <h2 className="text-4xl font-bold mb-6">Update Employee Detail</h2>
                         {/* image  */}
                         <div className='mb-3'>
                             <label htmlFor="image">Employee image</label>

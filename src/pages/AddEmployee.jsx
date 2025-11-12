@@ -74,7 +74,7 @@ try {
                 onSubmit={onSubmitHandler}
             >
                 {({ values }) => (
-                <Form className='w-full md:w-2/4 py-6 bg-zinc-100 px-4'>
+                <Form className='w-full md:w-2/4 py-6 bg-zinc-100 px-6'>
                     <h2 className="text-4xl font-bold mb-6">Add Employee</h2>
                     {/* image  */}
                     <div className='mb-3'>
