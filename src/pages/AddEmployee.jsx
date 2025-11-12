@@ -6,10 +6,14 @@ import * as yup from "yup";
 import { toast } from 'react-toastify';
 import { useState } from "react";
 import { axiosClient } from "../utils/axios";
+import { useMainContext } from '../context/mainContext';
+import { useNavigate } from 'react-router-dom';
 
 const AddEmployee = () => {
 
 const [loading, setLoading] = useState(false);
+const { fetchUserProfile } = useMainContext();
+const navigate = useNavigate()
 
     const initialValues = {
         name: "",
@@ -52,8 +56,9 @@ try {
         const data = response.data;
         toast.success(data.message || "Add Employee successful!")
         helper.resetForm();
+        navigate("/")
+        fetchUserProfile();
 } catch (err) {
-    // console.error("❌ add employee error:", err);
     toast.error(err.response?.data?.message || "Something went wrong! in add employee");
   }
   finally{
@@ -69,12 +74,12 @@ try {
                 onSubmit={onSubmitHandler}
             >
                 {({ values }) => (
-                <Form className='w-[90%] mx-auto py-10 bg-zinc-100 px-20'>
-                    <h2 className="text-4xl font-bold text-center mb-6">Add Employee</h2>
+                <Form className='w-full md:w-2/4 py-6 bg-zinc-100 px-4'>
+                    <h2 className="text-4xl font-bold mb-6">Add Employee</h2>
                     {/* image  */}
                     <div className='mb-3'>
                         <label htmlFor="image">Employee image</label>
-                        <Field type="file" name="image" className='w-full py-2 border border-gray-400 rounded outline-none px-3 placeholder:font-medium' placeholder='Enter Employee Name' >
+                        <Field type="file" name="image" className='w-full py-2 border border-gray-400 rounded outline-none px-3 placeholder:font-medium' placeholder='Enter Employee image' >
                         </Field>
                         <ErrorMessage name="image" component={"p"} className="text-red-500 text-xs mt-1" />
                     </div>
@@ -141,7 +146,7 @@ try {
                     </div>
                     <div>
                         {/* <CustomLoaderButton text="Add employee" /> */}
-                        <button type='submit' className='bg-blue-800 w-full py-1 rounded cursor-pointer'>Add employee</button>
+                        <button type='submit' disabled={loading} className='bg-blue-600 w-[60%] py-1 rounded cursor-pointer'>{loading ? "Adding..." : "Add Employee Data"}</button>
                     </div>
                 </Form>
                 )}

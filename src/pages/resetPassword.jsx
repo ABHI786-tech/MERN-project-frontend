@@ -37,7 +37,7 @@ function ResetPassword() {
 
       setLoading(true);
 
-      const response = await axios.post(`http://localhost:8000/resetpassword?token=${token}`,
+      const response = await axios.post(`resetpassword?token=${token}`,
         { newpassword: values.newpassword }
       );
 
@@ -63,13 +63,13 @@ function ResetPassword() {
 
   
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-gray-100">
+    <div className="min-h-[80vh] flex justify-center bg-gray-300">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmitHandler}
       >
-        <Form className="bg-white shadow-md rounded-lg p-8 w-[95%] md:w-1/2 xl:w-1/3">
+        <Form className="bg-white shadow-md rounded-lg px-12 py-6 w-[95%] md:w-1/2 xl:w-1/3">
           <h2 className="text-4xl font-bold text-center mb-6">
             Reset Password
           </h2>

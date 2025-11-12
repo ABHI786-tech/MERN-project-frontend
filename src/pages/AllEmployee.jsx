@@ -32,13 +32,13 @@ const AllEmployee = () => {
 
     const deleteEmployee = async (id) => {
         try {
-            const response = await axiosClient.delete(`/employee/${id}`,{
+            const data = await axiosClient.delete(`/employee/${id}`,{
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem("token")
                 }
             })
             getEmployee();
-            toast.success(response.message)
+            toast.success(data.message || "Employee Data Deleted successfully")
 
         } catch (error) {
             toast.error(error.message)
@@ -49,8 +49,8 @@ const AllEmployee = () => {
     return (
         <>
             <div> <h2 className="text-4xl font-bold text-center mb-6 text-wrap">All Employees Details</h2> </div>
-            <div>
-                <table className="table-fixed border w-full text-wrap ">
+            <div className=''>
+                <table className="table-fixed border w-full ">
                     <thead>
                         <tr>
                             <th className='px-[2%] border-r border-b text-wrap'>Name</th>

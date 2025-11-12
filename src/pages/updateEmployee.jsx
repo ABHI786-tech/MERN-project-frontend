@@ -39,28 +39,35 @@ const UpdateEmployee = () => {
         try {
             setLoading(true);
             const token = localStorage.getItem("token");
-            const response = await axiosClient.get(`updateemployee/${id}`,{
+            const response = await axiosClient.get(`updateemployee/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
             });
-            setEmployee(response.data.employee);
-        } catch (err) {
-            toast.error(err.response?.data?.message || "Failed to load employee data");
+             const emp = response.data.employee
+            // setEmployee(response.data.employee);
+             setEmployee({
+                ...emp,
+                dob: emp.dob ? emp.dob.split("T")[0] : "" 
+            });
+            
+        }
+         catch (error) {
+            toast.error(error.response?.data?.message || "Failed to load employee data");
         } finally {
             setLoading(false);
         }
     };
-    
-    
+
+
     useEffect(() => {
         if (id) {
             fetchEmployee();
         }
     }, [id])
-    
-    
-    
+
+
+
     const onSubmitHandler = async (values, helper) => {
         try {
             setLoading(true)
@@ -69,7 +76,7 @@ const UpdateEmployee = () => {
                 setLoading(false);
                 return;
             }
-            
+
             const response = await axiosClient.put(`/updateemployee/${id}`, values,
                 {
                     headers: {
@@ -77,13 +84,14 @@ const UpdateEmployee = () => {
                     }
                 }
             )
-            
+
             // console.log(values, "values")
             const data = response.data;
             // setEmployee(data.data.employees)
+           
 
             toast.success(data.message || "update Employee successful!")
-           setTimeout(() => navigate("/allemployee"), 1000);
+            setTimeout(() => navigate("/allemployee"), 1000);
             helper.resetForm();
         } catch (err) {
             console.error("❌ add employee error:", err);
@@ -103,7 +111,7 @@ const UpdateEmployee = () => {
                 enableReinitialize={true}
             >
                 {({ values }) => (
-                    <Form className='w-[90%] mx-auto py-10 bg-zinc-100'>
+                    <Form className='w-[90%] px-auto py-10 bg-zinc-100'>
                         {/* image  */}
                         <div className='mb-3'>
                             <label htmlFor="image">Employee image</label>
@@ -173,7 +181,7 @@ const UpdateEmployee = () => {
                             <ErrorMessage name="address" component={"p"} className="text-red-500 text-xs mt-1" />
                         </div>
                         <div>
-                            <button type='submit' disabled={loading} className='bg-blue-800 w-full py-1 rounded-2xl cursor-pointer'>{loading ? "Updating..." : "Update Employee Data"}</button>
+                            <button type='submit' disabled={loading} className='bg-blue-600 w-full py-1 rounded-2xl cursor-pointer'>{loading ? "Updating..." : "Update Employee Data"}</button>
                         </div>
                     </Form>
                 )}

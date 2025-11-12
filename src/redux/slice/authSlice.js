@@ -10,6 +10,7 @@ export const authSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload.user; 
+      state.token = action.payload.token || state.token;
       //  console.log("✅ setUser called with:", action.payload);
     },
     removeUser(state) {

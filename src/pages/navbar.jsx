@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../assets/react.svg";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authSlicePath } from "../redux/slice/authSlice";
@@ -10,35 +9,31 @@ const Navbar = () => {
     const user = useSelector(authSlicePath)
     const { LogoutHandler } = useMainContext()
     return (
-        <div className="flex justify-around item-center px-[6%] py-4 bg-gray-300 shadow-md font-semibold ">
-            <div className="flex flex-row "><span> <img src={logo} alt="Logo" className="w-7 h-7" /></span><span className="px-8 font-bold text-xl">Employee Manager </span></div>
+        <div className="flex sticky top-0 item-center px-[8%] justify-between py-4 shadow-md font-semibold gap-x-[12%] bg-linear-to-r from-blue-300 via-blue-600 to-[#1b3891a8] ">
+            <div className="px-[3%] font-bold text-[18px] text-center">EMS</div>
             <ul className="flex space-x-8">
                 <li>
                     <NavLink
-                        to="/" className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : "text-gray-700"
+                        to="/" className={({ isActive }) => isActive ? "text-white font-semibold" : "text-gray-800"
                         } > Home </NavLink>
                 </li>
                 {!user ? <>
                     <li>
-                        <NavLink to="/login" className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : "text-gray-700"
+                        <NavLink to="/login" className={({ isActive }) => isActive ? "text-white font-semibold" : "text-gray-800"
                         }
                         >Login </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/register" className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : "text-gray-700"
+                        <NavLink to="/register" className={({ isActive }) => isActive ? "text-white font-semibold" : "text-gray-800"
                         }> Register </NavLink>
                     </li>
                 </> :
-                    <li>
-                        <button onClick={LogoutHandler} className="font-semibold px-4 bg-red-500 text-white outline-none rounded cursor-pointer "
+                    <li className="float-end">
+                        <button onClick={LogoutHandler} className="font-semibold px-4 bg-red-500 text-white outline-none rounded cursor-pointer   "
                         > log Out </button>
                     </li>}
 
             </ul>
-            {/* <div>
-                <div>profile photo</div>
-                <div>profile name</div>
-            </div> */}
         </div>
     );
 };

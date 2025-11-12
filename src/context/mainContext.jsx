@@ -16,6 +16,16 @@ export const MainContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+   const [initialValues, setInitialValues] = useState({
+    name: "",
+    salary: "",
+    mobile: "",
+    email: "",
+    role: "",
+    dob: "",
+    address: ""
+  });
   
 
 
@@ -36,19 +46,15 @@ export const MainContextProvider = ({ children }) => {
         setLoading(false);
         return;
       }
-// console.log("🔹 Sending request...");
       const response = await axiosClient.get("/profile", {
         headers:{
           Authorization:`Bearer ${token}`
         },
       });
-      // console.log("✅ response:", response);
-      
+    
       
       const data = response.data
-      // console.log("✅ Got response:", response.data);
-      ///////////////////////////////////////??????????????????????????????
-      dispatch(setUser({user:response.data.user}));
+      dispatch(setUser({user:response.data}));
       // toast.success(data.message || "user profile fetched")
     } catch (error) {
       // console.log(error,"error from fetch catch")
@@ -65,6 +71,7 @@ export const MainContextProvider = ({ children }) => {
     fetchUserProfile();
   }, []);
 
+  
   
   if (loading) {
     return <div className="text-center p-10">Loading...</div>;

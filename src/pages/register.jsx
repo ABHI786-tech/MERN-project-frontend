@@ -80,7 +80,7 @@ function RegisterPage() {
 
 
     return (
-        <div className="min-h-[80vh] flex items-center justify-center bg-gray-100">
+        <div className="min-h-[80vh] flex justify-center bg-gray-300">
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}

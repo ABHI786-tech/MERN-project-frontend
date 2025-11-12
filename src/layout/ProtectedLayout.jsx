@@ -27,8 +27,8 @@ const SidebarItemList = [{
 const ProtectedLayout = () => {
     const user = useSelector(authSlicePath)
     const [loading, setLoading] = useState(true)
-    const navigate = useNavigate()
     const { pathname } = useLocation()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!user) {
@@ -46,29 +46,29 @@ const ProtectedLayout = () => {
 
     return (
         <>
-            <div className='flex w-[90%] mx-[2%] flex-col gap-y-6 lg:flex-row  item-start py-[6%] gap-x-7 md: text-sm text-wrap text-center'>
-                <div className='w-1/4 hidden lg:flex flex-col min-h-[80vh] bg-gray-300 py-4'>
+            <div className='flex w-[95%] mx-[2%] text-xs md:text-base flex-col gap-y-6 lg:flex-row  item-start py-[6%] gap-x-7  text-wrap text-center'>
+                <div className='w-1/4 hidden lg:flex flex-col min-h-screen  bg-gray-300 py-4'>
                     {
                         SidebarItemList.map((cur, i) => {
                             return <SidebarMenuItem item={cur} key={i} />
                         })
                     }
                 </div>
-                <ul className="flex item-center h-full gap-x-3 lg:hidden" >
-                    {
-                        SidebarItemList.map((cur, i) => {
-                            const isActive = window.location.pathname === cur.link
-                            return (<li
-                                key={i}
-                                className={`  px-3 py-1 rounded-full transition-colors duration-200 cursor-pointer hover:bg-gray-600 ${isActive ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700 '}
+                    <ul className="flex item-center h-full gap-x-3 lg:hidden" >
+                        {
+                            SidebarItemList.map((cur, i) => {
+                                const isActive = window.location.pathname === cur.link
+                                return (<li
+                                    key={i}
+                                    className={`flex px-[3%] text-center justify-center-safe py-1 rounded-full transition-colors duration-200 cursor-pointer hover:bg-gray-600 ${isActive ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-800 '}
                                 `}>
-                                <Link to={cur.link} className='flex items-center gap-x-1'>
-                                <cur.Icon className='text-lg'/><span>{cur.name}</span></Link>
-                            </li>)
-                        })
-                    }
-                </ul>
-                <section><Outlet /></section>
+                                    <Link to={cur.link} className='flex items-center gap-x-1'>
+                                        <cur.Icon className='text-lg' /><span>{cur.name}</span></Link>
+                                </li>)
+                            })
+                        }
+                    </ul>
+                <section className='w-full'><Outlet /></section>
             </div>
         </>)
 }
@@ -80,7 +80,7 @@ const SidebarMenuItem = ({ item }) => {
     const isActive = pathname === item.link
     return <Link
         to={item.link}
-        className={`w-full py-3 px-3 flex justify-start gap-x-3 items-center rounded-md transition-colors duration-200 cursor-pointer ${isActive ? 'bg-blue-500 text-white' : 'text-gray-700 hover:bg-gray-200'}
+        className={`w-full py-3 px-3 flex justify-start gap-x-3 items-center rounded-md transition-colors duration-200 cursor-pointer ${isActive ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-gray-200'}
       `}
     >
         <item.Icon className='text-2x1' />  <span>{item.name}</span>
